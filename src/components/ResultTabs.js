@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import Graph from './Graph';
+import ResultTable from './ResultTable';
 
 import '../styles/ResultTabs.scss';
 
@@ -89,7 +90,7 @@ class ResultTabs extends Component {
     return [
       {
         name: 'Recommendations',
-        content: JSON.stringify(queryResult),
+        content: <ResultTable queryResult={queryResult} />
       },
       {
         name: 'Graph',

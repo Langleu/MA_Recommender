@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-function Header() {
+export default function Header() {
   return (
     <div>
       <Head>
@@ -27,5 +27,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header;

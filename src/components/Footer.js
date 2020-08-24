@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Health from './Health';
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="footer">
       <div className="content has-text-centered">
@@ -34,5 +34,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;
