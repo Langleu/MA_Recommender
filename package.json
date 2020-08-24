@@ -1,0 +1,44 @@
+{
+  "name": "ma_recommender",
+  "version": "0.0.1",
+  "description": "Recommender System based on crowdsourced data.",
+  "scripts": {
+    "dev": "next dev -p 8088",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --fix",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Langleu/MA_Recommender.git"
+  },
+  "author": "Langleu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Langleu/MA_Recommender/issues"
+  },
+  "homepage": "https://github.com/Langleu/MA_Recommender#readme",
+  "dependencies": {
+    "@webdeb/next-styles": "^1.1.0",
+    "bulma": "^0.9.0",
+    "lodash": "^4.17.19",
+    "next": "^9.5.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-graph-vis": "^1.0.5",
+    "react-transition-group": "^4.4.1",
+    "swr": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.5",
+    "prettier": "^2.0.5"
+  }
+}
