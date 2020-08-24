@@ -17,7 +17,7 @@ const Tab = (props) => {
       className={name === activeTab && 'is-active' ? 'is-active' : ''}
       onClick={() => changeActiveTab(name)}
     >
-      <a href={`#${name}`} style={{ textDecoration: 'none' }}>
+      <a style={{ textDecoration: 'none' }}>
         <span>{name}</span>
       </a>
     </li>
@@ -40,7 +40,7 @@ Tab.propTypes = {
 const Tabs = (props) => {
   const { tabList, activeTab, changeActiveTab } = props;
   return (
-    <div className="tabs">
+    <div className="tabs is-boxed is-fullwidth">
       <ul>
         {tabList.map((tab) => (
           <Tab tab={tab} key={tab.name} activeTab={activeTab} changeActiveTab={changeActiveTab} />
@@ -77,6 +77,7 @@ class ResultTabs extends Component {
 
     this.state = {
       activeTab: 'Recommendations',
+      animate: false,
     };
 
     this.activeTabContent = this.activeTabContent.bind(this);
@@ -97,7 +98,13 @@ class ResultTabs extends Component {
     ];
   }
 
+  animate() {
+    const { animate } = this.state;
+    this.setState({ animate: !animate });
+  }
+
   changeActiveTab(tab) {
+    this.animate();
     this.setState({ activeTab: tab });
   }
 
@@ -111,7 +118,7 @@ class ResultTabs extends Component {
   }
 
   render() {
-    const { activeTab } = this.state;
+    const { activeTab, animate } = this.state;
     return (
       <section className="section">
         <div className="container">
@@ -122,7 +129,8 @@ class ResultTabs extends Component {
           />
 
           <CSSTransition
-            classNames="alert"
+            in={animate}
+            classNames="fade"
             className="tabs-content"
             component="div"
             timeout={{ enter: 0, exit: 150 }}

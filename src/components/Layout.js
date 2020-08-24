@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import Header from './Header';
+import Footer from './Footer';
 
 import '../styles/main.scss';
 import 'bulma';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 class Layout extends Component {
   constructor(props) {
@@ -37,11 +39,12 @@ class Layout extends Component {
   render() {
     const { children } = this.props;
     return (
-      <div>
+      <div className="page-wrapper">
         <Header />
-        <div className="container is-fluid">
-          <div className="notification">{children}</div>
-        </div>
+        <section className="section content-wrapper">
+          <div className="container is-fluid">{children}</div>
+        </section>
+        <Footer />
       </div>
     );
   }

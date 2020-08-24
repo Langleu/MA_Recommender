@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Layout from '../components/Layout';
-import Health from '../components/Health';
 import SearchBar from '../components/SearchBar';
 import ResultTabs from '../components/ResultTabs';
 
@@ -9,7 +8,7 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      queryResult: {},
+      queryResult: null,
     };
 
     this.handleQuery = this.handleQuery.bind(this);
@@ -21,16 +20,14 @@ class Index extends Component {
 
   render() {
     const { queryResult } = this.state;
+    let tabs = '';
 
+    if (queryResult) tabs = <ResultTabs queryResult={queryResult} />;
     return (
       <Layout>
         <div>
-          <h1 className="title">Test</h1>
-          <Health />
           <SearchBar updateQuery={this.handleQuery} />
-
-          <p>{JSON.stringify(queryResult)}</p>
-          <ResultTabs queryResult={queryResult} />
+          {tabs}
         </div>
       </Layout>
     );

@@ -10,7 +10,12 @@ function Header() {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar"
+        style={{ backgroundColor: '#fafafa' }}
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div className="navbar-brand">
           <Link href="/">
             <a className="navbar-item" href="/">
