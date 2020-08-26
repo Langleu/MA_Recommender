@@ -90,7 +90,7 @@ class ResultTabs extends Component {
     return [
       {
         name: 'Recommendations',
-        content: <ResultTable queryResult={queryResult} />
+        content: <ResultTable queryResult={queryResult} />,
       },
       {
         name: 'Graph',
@@ -145,7 +145,7 @@ class ResultTabs extends Component {
 }
 
 ResultTabs.propTypes = {
-  queryResult: PropTypes.objectOf(PropTypes.any).isRequired,
+  queryResult: PropTypes.array.isRequired,
 };
 
 export default ResultTabs;

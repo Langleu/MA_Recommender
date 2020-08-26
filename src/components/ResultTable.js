@@ -1,17 +1,38 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const TableEntry = (props) => {
-  const { score, user, repository, deployment } = props;
+  const { score, user, repository, deployment, rawUrl } = props;
   return (
     <tr>
       <td>{score}</td>
-      <td>{user}</td>
-      <td>{repository}</td>
-      <td>{deployment}</td>
+      <td>
+        <a href={`https://github.com/${user}`} target="_blank" rel="noreferrer">
+          {user}
+        </a>
+      </td>
+      <td>
+        <a href={`https://github.com/${user}/${repository}`} target="_blank" rel="noreferrer">
+          {repository}
+        </a>
+      </td>
+      <td>
+        <a href={rawUrl} target="_blank" rel="noreferrer">
+          {deployment}
+        </a>
+      </td>
     </tr>
   );
-}
+};
+
+TableEntry.propTypes = {
+  score: PropTypes.number.isRequired,
+  user: PropTypes.string.isRequired,
+  repository: PropTypes.string.isRequired,
+  deployment: PropTypes.string.isRequired,
+  rawUrl: PropTypes.string.isRequired,
+};
 
 class ResultTable extends Component {
   constructor(props) {
@@ -20,38 +41,7 @@ class ResultTable extends Component {
   }
 
   render() {
-    const example = [
-      { user: "A",
-        score: Math.round(Math.random() * 100),
-        repository: 'something',
-        deployment: 'docker-compose.yml'
-      },
-      { user: "B",
-        score: Math.round(Math.random() * 100),
-        repository: 'something',
-        deployment: 'docker-compose.yml'
-      },
-      { user: "C",
-        score: Math.round(Math.random() * 100),
-        repository: 'something',
-        deployment: 'docker-compose.yml'
-      },
-      { user: "D",
-        score: Math.round(Math.random() * 100),
-        repository: 'something',
-        deployment: 'docker-compose.yml'
-      },
-      { user: "E",
-        score: Math.round(Math.random() * 100),
-        repository: 'something',
-        deployment: 'docker-compose.yml'
-      },
-      { user: "F",
-        score: Math.round(Math.random() * 100),
-        repository: 'something',
-        deployment: 'docker-compose.yml'
-      }
-    ]
+    const { queryResult } = this.props;
     return (
       <table className="table table is-hoverable table is-fullwidth">
         <thead>
@@ -63,13 +53,24 @@ class ResultTable extends Component {
           </tr>
         </thead>
         <tbody>
-          {example.map((e) => (
-            <TableEntry key={e.user} score={e.score} user={e.user} repository={e.repository} deployment={e.deployment} />
+          {queryResult.map((e) => (
+            <TableEntry
+              key={e.repository.id}
+              score={e.deployment.score}
+              user={e.user.name}
+              repository={e.repository.name}
+              deployment={e.deployment.name}
+              rawUrl={e.deployment.rawUrl}
+            />
           ))}
         </tbody>
       </table>
     );
   }
 }
+
+ResultTable.propTypes = {
+  queryResult: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
 
 export default ResultTable;
