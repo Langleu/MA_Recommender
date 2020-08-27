@@ -79,22 +79,35 @@ class ResultTabs extends Component {
     this.state = {
       activeTab: 'Recommendations',
       animate: false,
+      selectedRow: '',
     };
 
     this.activeTabContent = this.activeTabContent.bind(this);
     this.changeActiveTab = this.changeActiveTab.bind(this);
+    this.selectRow = this.selectRow.bind(this);
   }
+
+  selectRow = (e) => {
+    this.setState({ selectedRow: e.target.dataset.key });
+  };
 
   tabList() {
     const { queryResult } = this.props;
+    const { selectedRow } = this.state;
     return [
       {
         name: 'Recommendations',
-        content: <ResultTable queryResult={queryResult} />,
+        content: (
+          <ResultTable
+            queryResult={queryResult}
+            selectRow={this.selectRow}
+            selectedRow={selectedRow}
+          />
+        ),
       },
       {
         name: 'Graph',
-        content: <Graph />,
+        content: <Graph queryResult={queryResult} deploymentId={selectedRow} />,
       },
     ];
   }

@@ -3,21 +3,34 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const TableEntry = (props) => {
-  const { score, user, repository, deployment, rawUrl } = props;
+  const {
+    score,
+    user,
+    repository,
+    deployment,
+    rawUrl,
+    deploymentId,
+    selectRow,
+    selectedRow,
+  } = props;
   return (
-    <tr>
-      <td>{score}</td>
-      <td>
+    <tr
+      className={selectedRow === deploymentId ? 'is-selected' : ''}
+      data-key={deploymentId}
+      onClick={selectRow}
+    >
+      <td data-key={deploymentId}>{score}</td>
+      <td data-key={deploymentId}>
         <a href={`https://github.com/${user}`} target="_blank" rel="noreferrer">
           {user}
         </a>
       </td>
-      <td>
+      <td data-key={deploymentId}>
         <a href={`https://github.com/${user}/${repository}`} target="_blank" rel="noreferrer">
           {repository}
         </a>
       </td>
-      <td>
+      <td data-key={deploymentId}>
         <a href={rawUrl} target="_blank" rel="noreferrer">
           {deployment}
         </a>
@@ -32,6 +45,9 @@ TableEntry.propTypes = {
   repository: PropTypes.string.isRequired,
   deployment: PropTypes.string.isRequired,
   rawUrl: PropTypes.string.isRequired,
+  deploymentId: PropTypes.string.isRequired,
+  selectRow: PropTypes.func.isRequired,
+  selectedRow: PropTypes.string.isRequired,
 };
 
 class ResultTable extends Component {
@@ -41,7 +57,7 @@ class ResultTable extends Component {
   }
 
   render() {
-    const { queryResult } = this.props;
+    const { queryResult, selectedRow, selectRow } = this.props;
     return (
       <table className="table table is-hoverable table is-fullwidth">
         <thead>
@@ -61,6 +77,9 @@ class ResultTable extends Component {
               repository={e.repository.name}
               deployment={e.deployment.name}
               rawUrl={e.deployment.rawUrl}
+              deploymentId={e.deployment.id}
+              selectRow={selectRow}
+              selectedRow={selectedRow}
             />
           ))}
         </tbody>
@@ -71,6 +90,8 @@ class ResultTable extends Component {
 
 ResultTable.propTypes = {
   queryResult: PropTypes.arrayOf(PropTypes.any).isRequired,
+  selectedRow: PropTypes.string.isRequired,
+  selectRow: PropTypes.func.isRequired,
 };
 
 export default ResultTable;
