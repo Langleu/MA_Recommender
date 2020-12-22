@@ -27,7 +27,7 @@ export const graknToJSON = (array) => {
 };
 
 export const runQuery = async (query) => {
-  const client = new Grakn('localhost:48555');
+  const client = new Grakn(process.env.GRAKNURI || 'localhost:48555');
   const session = await client.session('docker');
   const readTransaction = await session.transaction().read();
 
