@@ -22,9 +22,10 @@ class SearchBar extends Component {
     e.preventDefault();
     const { input, option } = this.state;
     const { updateQuery } = this.props;
+    updateQuery(true, 'loading');
 
     const data = await postFetcher('/api/v1/query', { images: input, type: option });
-
+    updateQuery(false, 'loading');
     updateQuery(data);
   }
 
