@@ -26,13 +26,14 @@ export const graknToJSON = (array) => {
   return results;
 };
 
-export const runQuery = async (query) => {
+export const runQuery = async (query, maximum = false) => {
   const client = new Grakn(process.env.GRAKNURI || 'localhost:48555');
   const session = await client.session('docker');
   const readTransaction = await session.transaction().read();
 
   const answerIterator = await readTransaction.query(query);
   const answers = await answerIterator.collect();
+  if (maximum) return (answers.length > 0) ? answers[0].number() : undefined;
   const results = graknToJSON(answers);
 
   await session.close();

@@ -19,7 +19,7 @@ const TableEntry = (props) => {
       data-key={deploymentId}
       onClick={selectRow}
     >
-      <td data-key={deploymentId}>{score}</td>
+      <td data-key={deploymentId}>{score/100}</td>
       <td data-key={deploymentId}>
         <a href={`https://github.com/${user}`} target="_blank" rel="noreferrer">
           {user}
